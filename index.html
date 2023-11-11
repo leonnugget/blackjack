@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<style>
+  table {
+    border-collapse: collapse;
+  }
+  td,tr {
+    width: 70px;
+    height: 40px;
+  }
+  tr:hover {background-color: #f5f5f5;}
+  table {
+    text-align: center;
+  }
+  table, th, td {
+    border: 1px solid black;
+  }
+  h1,h2 {
+    text-align: center;
+  }
+  
+</style>
+<div id="app">
+  <h1>
+    DECKS: {{ deckOrProducts }}
+  </h1>
+  <h1>
+    COUNT: {{ count }}
+  </h1>
+  <table id="table">
+            <thead>
+                <tr>
+                    <th v-for="product in products">
+                      {{ product.card }}
+                  </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td v-for="product in products">
+                    {{ product.quantity }}
+                      <span v-if="product.quantity <= 0">
+                       NONE LEFT
+                       </span>
+                  </td>
+                  <td>
+                    {{ totalProducts }} Cards
+                  </td>
+                </tr>
+              <tr>
+                    <td v-for="product in products">
+                    {{ (product.quantity/totalProducts*100).toFixed(2) }}%
+                  </td>
+                </tr>
+              <tr>
+                <td v-for="product in products">
+                    <button @click="ac(product.card); product.quantity += 1">
+        Add
+      </button>
+      <button @click="nc(product.card); product.quantity -= 1">
+        Remove
+      </button>
+                  </td>
+              </tr>
+            </tbody>
+        </table>
+        <button type="button" @click="removeFourFromAllProducts()">Remove Deck</button>
+        <button type="button" @click="addFourToAllProducts()">Add Deck</button>
+  <button onClick="window.location.href=window.location.href">Reset</button>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.9/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
